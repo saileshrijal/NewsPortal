@@ -164,6 +164,18 @@ p {
   font-size: 14px;
 }
 
+.card-style .dropdown-menu li form button {
+  display: block;
+  font-size: 14px;
+}
+
+#logoutBtn{
+  display: block;
+  width: 100%;
+  background-color: #4a6cf7 !important;
+  color: white;
+}
+
 /* ======= Border Radius ========= */
 .radius-4 {
   border-radius: 4px;

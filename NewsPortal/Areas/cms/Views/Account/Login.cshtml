@@ -1,3 +1,5 @@
+@model LoginVm
+
 @{
     Layout = null;
 }
@@ -9,7 +11,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="~/admin-theme/jassets/images/favicon.svg" type="image/x-icon" />
+    <link rel="shortcut icon" href="~/admin-theme/assets/images/favicon.svg" type="image/x-icon" />
     <title>Sign In | PlainAdmin Demo</title>
 
     <!-- ========== All CSS files linkup ========= -->
@@ -54,44 +56,44 @@
                                     <div class="form-wrapper">
                                         <h4 class="mb-15">CMS - NewsPortal</h6>
                                             <hr>
-                                            <form action="#">
+                                            <form asp-action="Login">
+                                                <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <div class="input-style-1">
+                                                        <div class="input-style-1 mb-3">
                                                             <label>Username</label>
-                                                            <input type="text" placeholder="Username" required/>
+                                                            <input type="text" placeholder="Username" asp-for="UserName"
+                                                                required />
+                                                            <span class="text-danger"
+                                                                asp-validation-for="UserName"></span>
                                                         </div>
                                                     </div>
                                                     <!-- end col -->
                                                     <div class="col-12">
-                                                        <div class="input-style-1">
+                                                        <div class="input-style-1 mb-3">
                                                             <label>Password</label>
-                                                            <input type="password" placeholder="Password" required/>
+                                                            <input type="password" placeholder="Password"
+                                                                asp-for="Password" required />
+                                                            <span class="text-danger"
+                                                                asp-validation-for="Password"></span>
                                                         </div>
                                                     </div>
                                                     <!-- end col -->
                                                     <div class="col-xxl-6 col-lg-12 col-md-6">
                                                         <div class="form-check checkbox-style mb-30">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="checkbox-remember" />
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="checkbox-remember" asp-for="RememberMe" />
                                                             <label class="form-check-label" for="checkbox-remember">
                                                                 Remember me</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <div class="
-                            button-group
-                            d-flex
-                            justify-content-center
-                            flex-wrap
-                          ">
-                                                            <button class="
-                              main-btn
-                              primary-btn
-                              btn-hover
-                              w-100
-                              text-center
-                            ">
+                                                        <div class="button-group d-flex
+                                                                    justify-content-center
+                                                                    flex-wrap
+                                                                ">
+                                                            <button class="main-btn primary-btn btn-hover w-100 text-center
+                                                                            ">
                                                                 Sign In
                                                             </button>
                                                         </div>
@@ -124,6 +126,8 @@
     <script src="~/admin-theme/assets/js/world-merc.js"></script>
     <script src="~/admin-theme/assets/js/polyfill.js"></script>
     <script src="~/admin-theme/assets/js/main.js"></script>
+    @await Component.InvokeAsync("Notyf")
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 </body>
 
 </html>
