@@ -33,7 +33,7 @@ namespace NewsPortal.Repositories
 
         public async Task<T> GetByAsync(Expression<Func<T, bool>> predicate)
         {
-            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(predicate)?? throw new Exception("Not Found");
+            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(predicate) ?? throw new Exception("Not Found");
         }
     }
 }

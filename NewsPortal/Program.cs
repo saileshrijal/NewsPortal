@@ -9,6 +9,8 @@ using NewsPortal.Repositories;
 using NewsPortal.Repositories.Interface;
 using NewsPortal.Seeder;
 using NewsPortal.Seeder.Interface;
+using NewsPortal.Services;
+using NewsPortal.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,9 +61,11 @@ builder.Services.AddScoped<IUserSeeder, UserSeeder>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //repository
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 //service
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 
 
@@ -73,7 +77,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
