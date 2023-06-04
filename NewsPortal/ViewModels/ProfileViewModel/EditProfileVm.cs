@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NewsPortal.ViewModels.ProfileViewModel
 {
     public class EditProfileVm
     {
         public string? Id { get; set; }
-        public string? UserName { get; set; }
-        public string? Email { get; set; }
 
         [Required(ErrorMessage = "First name is required")]
         public string? FirstName { get; set; }

@@ -11,11 +11,7 @@ namespace NewsPortal.ViewModels.ProfileViewModel
         public string? Id { get; set; }
         public string? UserName { get; set; }
         public string? Email { get; set; }
-
-        [Required(ErrorMessage = "First name is required")]
         public string? FirstName { get; set; }
-
-        [Required(ErrorMessage = "Last name is required")]
         public string? LastName { get; set; }
         public string? FacebookUrl { get; set; }
         public string? TwitterUrl { get; set; }
