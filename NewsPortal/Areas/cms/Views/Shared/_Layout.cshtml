@@ -1,4 +1,11 @@
 ﻿@using NewsPortal.Constants
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> _userManager
+
+@{
+    var loggedInUser = await _userManager.GetUserAsync(User);
+    var imageUrl = loggedInUser!.ImageUrl == null ? "/defaultImg/profile.png" : "/uploads/user/" + loggedInUser.ImageUrl;
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +14,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="~/admin-theme/assets/images/favicon.svg" type="image/x-icon" />
+    <link rel="shortcut icon" href="~/admin-theme/assets/images/favicon.png" type="image/x-icon" />
     <title>CMS - @ViewData["Title"]</title>
 
     <!-- ========== All CSS files linkup ========= -->
@@ -25,9 +32,8 @@
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
-            <a href="index.html">
-                @AppConstants.Name
-                <img src="~/admin-theme/assets/images/logo/logo.svg" alt="logo" />
+            <a asp-area="cms" asp-controller="Dashboard" asp-action="Index">
+                <img src="~/admin-theme/assets/images/logo/logo.png" alt="logo" height="50px" />
             </a>
         </div>
         <nav class="sidebar-nav">
@@ -49,22 +55,22 @@
                     <hr />
                 </span>
 
-                 <li class="nav-item nav-item-has-children">
+                <li class="nav-item nav-item-has-children">
                     <a asp-action="User" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_2"
                         aria-controls="ddmenu_2" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon">
-                           <i class="lni lni-user"></i>
+                            <i class="lni lni-user"></i>
                         </span>
                         <span class="text">User</span>
                     </a>
                     <ul id="ddmenu_2" class="collapse dropdown-nav">
-                          <li>
+                        <li>
                             <a asp-area="cms" asp-controller="User" asp-action="Index"> All Users </a>
                         </li>
                         <li>
                             <a asp-area="cms" asp-controller="User" asp-action="Add"> Add New </a>
                         </li>
-                       
+
                     </ul>
                 </li>
 
@@ -109,9 +115,9 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="profile-info">
                                         <div class="info">
-                                            <h6>John Doe</h6>
+                                            <h6>@loggedInUser.FullName</h6>
                                             <div class="image">
-                                                <img src="~/admin-theme/assets/images/profile/profile-image.png"
+                                                <img src="@imageUrl"
                                                     alt="" />
                                                 <span class="status"></span>
                                             </div>
@@ -121,20 +127,14 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                     <li>
-                                        <a href="#0">
+                                        <a asp-area="cms" asp-controller="Profile" asp-action="Index">
                                             <i class="lni lni-user"></i> View Profile
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#0">
-                                            <i class="lni lni-alarm"></i> Notifications
+                                        <a asp-area="cms" asp-controller="Profile" asp-action="ChangePassword">
+                                            <i class="lni lni-lock"></i> Change Password
                                         </a>
-                                    </li>
-                                    <li>
-                                        <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
-                                    </li>
-                                    <li>
-                                        <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
                                     </li>
                                     <li>
                                         <form asp-area="cms" asp-controller="Account" asp-action="Logout">
@@ -182,7 +182,7 @@
     </main>
     <!-- ======== main-wrapper end =========== -->
 
-    
+
 
     <!-- ========= All Javascript files linkup ======== -->
     <script src="~/admin-theme/assets/js/bootstrap.bundle.min.js"></script>

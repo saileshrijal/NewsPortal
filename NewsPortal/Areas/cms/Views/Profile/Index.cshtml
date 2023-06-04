@@ -1,0 +1,112 @@
+@model ProfileVm
+
+@{
+    ViewData["Title"] = "Profile";
+    var profileImage = Model.ImageUrl == null ? "/defaultImg/profile.png" : "/uploads/user/" + Model.ImageUrl;
+}
+
+<section class="section">
+    <div class="container-fluid">
+        <!-- ========== title-wrapper start ========== -->
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>My Profile</h2>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <a asp-action="Edit" class="btn btn-outline-primary"><i class="lni lni-pencil-alt"></i>
+                            Edit</a>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- ========== title-wrapper end ========== -->
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card-style settings-card-1 mb-30">
+
+                    <div class="profile-info">
+                        <div class="d-flex align-items-center mb-30">
+                            <div class="profile-image">
+                                <img src="@profileImage" alt="" id="imagePreview" />
+                            </div>
+                            <div class="profile-meta">
+                                <h5 class="text-bold text-dark mb-10">@Model.FirstName @Model.LastName</h5>
+                                <p class="text-sm text-gray">&#64;@Model.UserName</p>
+                            </div>
+                        </div>
+                        <div class="input-style-1">
+                            <label>Email</label>
+                            <input type="email" placeholder="Email" asp-for="Email" readonly />
+                        </div>
+                        <div class="input-style-1">
+                            <label>Website</label>
+                            <input type="text" asp-for="WebsiteUrl" readonly />
+                        </div>
+                        <div class="input-style-1">
+                            <label>About Me</label>
+                            <textarea rows="4" asp-for="About" readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card -->
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="card-style settings-card-2 mb-30">
+                    <div class="title mb-30">
+                        <h6>Social Links</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-style-1">
+                                <label>Facebook Url</label>
+                                <input type="text" asp-for="FacebookUrl" readonly />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-style-1">
+                                <label>Twitter Url</label>
+                                <input type="text" asp-for="TwitterUrl" readonly />
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="input-style-1">
+                                <label>Instagram Url</label>
+                                <input type="text" asp-for="InstagramUrl" readonly />
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="input-style-1">
+                                <label>LinkedIn Url</label>
+                                <input type="text" asp-for="LinkedInUrl" readonly />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-style-1">
+                                <label>Youtube Url</label>
+                                <input type="text" asp-for="YouTubeUrl" readonly />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</section>
+<!-- ========== section end ========== -->

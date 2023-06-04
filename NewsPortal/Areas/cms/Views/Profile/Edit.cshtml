@@ -1,0 +1,171 @@
+@model EditProfileVm
+
+@{
+    ViewData["Title"] = "Edit Profile";
+    var profileImage = Model.ImageUrl == null ? "/defaultImg/profile.png" : "/uploads/user/" + Model.ImageUrl;
+}
+
+<section class="section">
+    <div class="container-fluid">
+        <!-- ========== title-wrapper start ========== -->
+        <div class="title-wrapper pt-30">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="title mb-30">
+                        <h2>Edit Profile</h2>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-md-6">
+                    <div class="breadcrumb-wrapper mb-30">
+                        <a asp-action="Index" class="btn btn-outline-secondary"><i class="lni lni-arrow-left"></i>
+                            Profile</a>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- ========== title-wrapper end ========== -->
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="card-style settings-card-2 mb-30">
+                        <div class="title mb-30">
+                            <h6>Personal Details</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="settings-card-1 mb-30">
+                                    <div class="profile-info">
+                                        <div class="d-flex align-items-center mb-30">
+                                            <div class="profile-image">
+                                                <img src="@profileImage" alt="" id="imagePreview" />
+                                                <div class="update-image">
+                                                    <input type="file" id="image" asp-for="Image" />
+                                                    <label for="image"><i class="lni lni-cloud-upload"></i></label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end card -->
+                            </div>
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label>First Name</label>
+                                    <input type="text" placeholder="First Name" asp-for="FirstName" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label>Last Name</label>
+                                    <input type="text" placeholder="Last Name" asp-for="LastName" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label>About Me</label>
+                                    <textarea placeholder="About Me" rows="6" asp-for="About"></textarea>
+                                    <span asp-validation-for="About" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end col -->
+
+                <div class="col-lg-6">
+                    <div class="card-style settings-card-2 mb-30">
+                        <div class="title mb-30">
+                            <h6>Social Links</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label>Facebook Url</label>
+                                    <input type="text" placeholder="Facebook Url" asp-for="FacebookUrl" />
+                                    <span asp-validation-for="FacebookUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label>Twitter Url</label>
+                                    <input type="text" placeholder="Twitter Url" asp-for="TwitterUrl" />
+                                    <span asp-validation-for="TwitterUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label>Instagram Url</label>
+                                    <input type="text" placeholder="Instagram Url" asp-for="InstagramUrl" />
+                                    <span asp-validation-for="InstagramUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label>LinkedIn Url</label>
+                                    <input type="text" placeholder="LinkedIn Url" asp-for="LinkedInUrl" />
+                                    <span asp-validation-for="LinkedInUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label>Youtube Url</label>
+                                    <input type="text" placeholder="Youtube Url" asp-for="YouTubeUrl" />
+                                    <span asp-validation-for="YouTubeUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="input-style-1">
+                                    <label>Website</label>
+                                    <input type="text" placeholder="Website Url" asp-for="WebsiteUrl" />
+                                    <span asp-validation-for="WebsiteUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12">
+                                <button class="main-btn primary-btn btn-hover">
+                                    Update Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </form>
+
+    </div>
+    <!-- end container -->
+</section>
+<!-- ========== section end ========== -->
+
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        $(document).ready(function () {
+            $("#image").change(function () {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var dataURL = reader.result;
+                    $("#imagePreview").attr("src", dataURL);
+                };
+                var file = $("#image").prop("files")[0];
+                reader.readAsDataURL(file);
+            });
+        });
+    </script>
+}
