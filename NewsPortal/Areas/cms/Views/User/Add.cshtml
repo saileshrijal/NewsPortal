@@ -1,0 +1,96 @@
+@using NewsPortal.Constants
+@model CreateUserVm
+
+@{
+    ViewData["Title"] = "Add User";
+}
+
+<div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="title mb-30">
+                    <h2>Add User</h2>
+                </div>
+            </div>
+            <!-- end col -->
+            <div class="col-md-6">
+                <div class="breadcrumb-wrapper mb-30">
+                    <a asp-action="Index" class="btn btn-outline-secondary"><i class="lni lni-arrow-left"></i>
+                        Users</a>
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    <!-- ========== form-elements-wrapper start ========== -->
+    <div class="form-elements-wrapper">
+
+        <!-- input style start -->
+        <form asp-action="Add">
+            <div class="card-style mb-30">
+                <div class="input-style-1">
+                    <label>Username</label>
+                    <input type="text" placeholder="Username" asp-for="UserName" />
+                    <span class="text-danger" asp-validation-for="UserName"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Email</label>
+                    <input type="email" placeholder="Email" asp-for="Email" />
+                    <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>First Name</label>
+                    <input type="text" placeholder="First Name" asp-for="FirstName" />
+                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Last Name</label>
+                    <input type="text" placeholder="Last Name" asp-for="LastName" />
+                    <span class="text-danger" asp-validation-for="LastName"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Role</label>
+                    <select asp-for="UserRole" class="form-control"> 
+                        <option value="@UserRoles.Admin">@UserRoles.Admin</option>
+                        <option value="@UserRoles.Author">@UserRoles.Author</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="UserRole"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Password</label>
+                    <input type="password" placeholder="Password" asp-for="Password" />
+                    <span class="text-danger" asp-validation-for="Password"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Confirm Password</label>
+                    <input type="password" placeholder="Confirm Password" asp-for="ConfirmPassword" />
+                    <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                </div>
+
+                <!-- end input -->
+                <button class="main-btn primary-btn square-btn btn-hover">Save</button>
+            </div>
+        </form>
+        <!-- end card -->
+        <!-- ======= input style end ======= -->
+
+    </div>
+</div>
+<!-- end container -->
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

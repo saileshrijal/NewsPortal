@@ -12,6 +12,15 @@ namespace NewsPortal.Helpers
             _webHostEnvironment = webHostEnvironment;
         }
 
+        public void DeleteFile(string fileName, string folderName)
+        {
+            using var tx = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+            var directoryPath = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", folderName);
+            var filePath = Path.Combine(directoryPath, fileName);
+            if (File.Exists(filePath)) File.Delete(filePath);
+            tx.Complete();
+        }
+
         public async Task<string> UploadFile(IFormFile file, string folderName)
         {
             using var tx = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);

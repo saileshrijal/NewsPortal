@@ -23,7 +23,7 @@ namespace NewsPortal.Seeder
             if (adminUsers.Any()) { throw new Exception("Admin user already exists"); }
 
             await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-            await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+            await _roleManager.CreateAsync(new IdentityRole(UserRoles.Author));
 
             var adminUser = new ApplicationUser()
             {

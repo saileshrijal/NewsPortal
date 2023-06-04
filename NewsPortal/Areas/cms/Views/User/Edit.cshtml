@@ -1,0 +1,112 @@
+@model EditUserVm
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="title mb-30">
+                    <h2>Edit User</h2>
+                </div>
+            </div>
+            <!-- end col -->
+            <div class="col-md-6">
+                <div class="breadcrumb-wrapper mb-30">
+                    <a asp-action="Index" class="btn btn-outline-secondary"><i class="lni lni-arrow-left"></i> Users</a>
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    <!-- ========== form-elements-wrapper start ========== -->
+    <div class="form-elements-wrapper">
+
+        <!-- input style start -->
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id">
+            <div class="card-style mb-30">
+
+                <div class="input-style-1">
+                    <label>First Name</label>
+                    <input type="text" placeholder="First Name" asp-for="FirstName" />
+                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                </div>
+
+                 <div class="input-style-1">
+                    <label>Last Name</label>
+                    <input type="text" placeholder="Last Name" asp-for="LastName" />
+                    <span class="text-danger" asp-validation-for="LastName"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>About</label>
+                    <textarea placeholder="Description" rows="4" asp-for="About"></textarea>
+                    <span class="text-danger" asp-validation-for="About"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Facebook Url</label>
+                    <input type="text" placeholder="Facebook Url" asp-for="FacebookUrl" />
+                    <span class="text-danger" asp-validation-for="FacebookUrl"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Twitter Url</label>
+                    <input type="text" placeholder="Twitter Url" asp-for="TwitterUrl" />
+                    <span class="text-danger" asp-validation-for="TwitterUrl"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Instagram Url</label>
+                    <input type="text" placeholder="Instagram Url" asp-for="InstagramUrl" />
+                    <span class="text-danger" asp-validation-for="InstagramUrl"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>LinkedIn Url</label>
+                    <input type="text" placeholder="LinkedIn Url" asp-for="LinkedInUrl" />
+                    <span class="text-danger" asp-validation-for="LinkedInUrl"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Youtube Url</label>
+                    <input type="text" placeholder="Youtube Url" asp-for="YouTubeUrl" />
+                    <span class="text-danger" asp-validation-for="YouTubeUrl"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Website Url</label>
+                    <input type="text" placeholder="Website Url" asp-for="WebsiteUrl" />
+                    <span class="text-danger" asp-validation-for="WebsiteUrl"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Upload Image</label>
+                    <input type="file" placeholder="Upload Image" asp-for="Image" />
+                    <span class="text-danger" asp-validation-for="Image"></span>
+                </div>
+
+                <!-- end input -->
+                <button class="main-btn primary-btn square-btn btn-hover">Save</button>
+            </div>
+        </form>
+        <!-- end card -->
+        <!-- ======= input style end ======= -->
+
+    </div>
+</div>
+<!-- end container -->
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
