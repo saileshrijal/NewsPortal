@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="~/admin-theme/assets/css/main.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 </head>
 
 <body>
@@ -56,26 +58,28 @@
                 </span>
 
                 <li class="nav-item nav-item-has-children">
-                    <a asp-action="User" class="collapsed" data-bs-toggle="collapse" data-bs-target="#ddmenu_2"
-                        aria-controls="ddmenu_2" aria-expanded="false" aria-label="Toggle navigation">
+                    <a asp-area="cms" asp-controller="User" asp-action="Index" class="collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#ddmenu_1" aria-controls="ddmenu_1"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon">
                             <i class="lni lni-user"></i>
                         </span>
                         <span class="text">User</span>
                     </a>
-                    <ul id="ddmenu_2" class="collapse dropdown-nav">
+                    <ul id="ddmenu_1" class="collapse dropdown-nav">
                         <li>
                             <a asp-area="cms" asp-controller="User" asp-action="Index"> All Users </a>
                         </li>
                         <li>
                             <a asp-area="cms" asp-controller="User" asp-action="Add"> Add New </a>
                         </li>
-
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a asp-area="cms" asp-controller="Category" asp-action="Index">
+                <li class="nav-item nav-item-has-children">
+                    <a asp-area="cms" asp-controller="Category" asp-action="Index" class="collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#ddmenu_2" aria-controls="ddmenu_2"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon">
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -85,6 +89,33 @@
                         </span>
                         <span class="text">Category</span>
                     </a>
+                    <ul id="ddmenu_2" class="collapse dropdown-nav">
+                        <li>
+                            <a asp-area="cms" asp-controller="Category" asp-action="Index"> All Categories </a>
+                        </li>
+                        <li>
+                            <a asp-area="cms" asp-controller="Category" asp-action="Add"> Add New </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-item-has-children">
+                    <a asp-area="cms" asp-controller="Post" asp-action="Index" class="collapsed"
+                        data-bs-toggle="collapse" data-bs-target="#ddmenu_3" aria-controls="ddmenu_3"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon">
+                            <i class="lni lni-clipboard"></i>
+                        </span>
+                        <span class="text">Post</span>
+                    </a>
+                    <ul id="ddmenu_3" class="collapse dropdown-nav">
+                        <li>
+                            <a asp-area="cms" asp-controller="Post" asp-action="Index"> All Posts </a>
+                        </li>
+                        <li>
+                            <a asp-area="cms" asp-controller="Post" asp-action="Add"> Add New </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>
@@ -117,8 +148,7 @@
                                         <div class="info">
                                             <h6>@loggedInUser.FullName</h6>
                                             <div class="image">
-                                                <img src="@imageUrl"
-                                                    alt="" />
+                                                <img src="@imageUrl" alt="" />
                                                 <span class="status"></span>
                                             </div>
                                         </div>
@@ -197,9 +227,25 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.tiny.cloud/1/7qjkjvz7eegr5schf3b8iwvemcxjb82zvn5nvbm02u8l4xkb/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
         let table = new DataTable('#dataTable');
+    </script>
+
+    <script>
+        tinymce.init({
+            selector: '#editor',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2();
+        });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await Component.InvokeAsync("Notyf")

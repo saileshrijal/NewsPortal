@@ -1,0 +1,168 @@
+@model CreatePostVm
+
+@{
+    ViewData["Title"] = "Add Post";
+}
+
+<div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="title mb-30">
+                    <h2>Add Post</h2>
+                </div>
+            </div>
+            <!-- end col -->
+            <div class="col-md-6">
+                <div class="breadcrumb-wrapper mb-30">
+                    <a asp-action="Index" class="btn btn-outline-secondary"><i class="lni lni-arrow-left"></i> Posts</a>
+                </div>
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+
+    <!-- ========== form-elements-wrapper start ========== -->
+    <div class="form-elements-wrapper">
+
+        <!-- input style start -->
+        <form asp-action="Add" enctype="multipart/form-data">
+            <div class="card-style mb-30">
+                <div class="input-style-1">
+                    <label>Title</label>
+                    <input type="text" placeholder="Title" asp-for="Title" />
+                    <span class="text-danger" asp-validation-for="Title"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Short Description</label>
+                    <input type="text" placeholder="Short Description" asp-for="ShortDescription" />
+                    <span class="text-danger" asp-validation-for="ShortDescription"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Slug</label>
+                    <input type="text" placeholder="Slug" asp-for="Slug" />
+                    <span class="text-danger" asp-validation-for="Slug"></span>
+                </div>
+
+                <div class="input-style-1">
+                    <label>Description</label>
+                    <textarea id="editor" placeholder="Description" rows="4" asp-for="Description"></textarea>
+                    <span class="text-danger" asp-validation-for="Description"></span>
+                </div>
+                <div class="input-style-1">
+                    <label>Choose Categories</label>
+                    <select asp-for="CategoryIds" asp-items="Model.Categories" class="select2 form-control" >
+                    </select>
+                </div>
+
+                <div class="form-check checkbox-style mb-20">
+                    <input class="form-check-input" type="checkbox" asp-for="IsBreakingNews" id="breakingNews" />
+                    <label class="form-check-label" for="breakingNews">
+                        Breaking News</label>
+                </div>
+                <div class="form-check checkbox-style mb-20">
+                    <input class="form-check-input" type="checkbox" asp-for="IsTicker" id="ticker" />
+                    <label class="form-check-label" for="ticker">
+                        News Ticker</label>
+                </div>
+                <br>
+                <div class="input-style-1" id="thumbnailInputContainer">
+                    <label class="form-check-label" for="thumbnailInput">
+                        Featured Image</label>
+                    <input type="file" id="thumbnailInput" asp-for="Thumbnail">
+                </div>
+                <div id="thumbnailPreviewContainer">
+                    <img src="/defaultImg/thumbnail.png" alt="" width="300" id="thumbnailPreview">
+                    <button type="button" id="removeThumbnailBtn">&cross;</button>
+                </div>
+            </div>
+            <div class="card-style mb-30">
+                <div class="row">
+                    <div class="input-style-1 col-6">
+                        <label>Meta Keywords</label>
+                        <input type="text" placeholder="Meta Keywords" asp-for="MetaKeywords" />
+                        <span class="text-danger" asp-validation-for="MetaKeywords"></span>
+                    </div>
+                    <div class="input-style-1 col-6">
+                        <label>Meta Description</label>
+                        <input type="text" placeholder="Meta Description" asp-for="MetaDescription" />
+                        <span class="text-danger" asp-validation-for="MetaDescription"></span>
+                    </div>
+
+                </div>
+            </div>
+            <!-- end input -->
+            <button class="btn btn-warning btn-hover" name="isPublish" value="false">Save As Draft</button>
+            <button class="btn btn-primary btn-hover" name="isPublish" value="true">Publish</button>
+        </form>
+        <!-- end card -->
+        <!-- ======= input style end ======= -->
+
+    </div>
+</div>
+<!-- end container -->
+
+<style>
+    #thumbnailPreviewContainer {
+        position: relative;
+        width: 300px;
+    }
+
+    #removeThumbnailBtn {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background: red;
+        border: none;
+        font-size: 1.5rem;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
+</style>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+        //display image preview only if file is selected
+        if ($('#thumbnailInput').val() == '') {
+            $('#thumbnailPreviewContainer').hide();
+            $('#thumbnailInput').show();
+
+            $('#thumbnailInput').change(function () {
+                $('#thumbnailPreviewContainer').show();
+                $('#thumbnailInput').hide();
+                let file = $(this).get(0).files;
+                let reader = new FileReader();
+                reader.readAsDataURL(file[0]);
+                reader.addEventListener("load", function (e) {
+                    let image = e.target.result;
+                    $('#thumbnailPreview').attr('src', image);
+                });
+            });
+        }
+
+        //remove image preview
+        if ($('#removeThumbnailBtn').click(function () {
+            $('#thumbnailPreviewContainer').hide();
+            $('#thumbnailInput').show();
+            $('#thumbnailInput').val('');
+        }));
+
+    </script>
+}

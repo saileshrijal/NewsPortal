@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewsPortal.Data;
 
@@ -11,9 +12,11 @@ using NewsPortal.Data;
 namespace NewsPortal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230605081037_PostAdded")]
+    partial class PostAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,13 +270,7 @@ namespace NewsPortal.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsBreakingNews")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsPublished")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsTicker")
                         .HasColumnType("bit");
 
                     b.Property<string>("MetaDescription")
