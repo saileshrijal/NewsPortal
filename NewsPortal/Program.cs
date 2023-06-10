@@ -62,10 +62,12 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //repository
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
 
 
 //service
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IPostService, PostService>();
 
 
 

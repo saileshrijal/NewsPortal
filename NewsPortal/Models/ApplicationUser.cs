@@ -20,5 +20,7 @@ namespace NewsPortal.Models
         public string? YouTubeUrl { get; set; }
         public string? WebsiteUrl { get; set; }
         public string? About { get; set; }
+
+        public List<Post>? Posts { get; set; }
     }
 }
